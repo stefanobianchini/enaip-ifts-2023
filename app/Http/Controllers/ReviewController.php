@@ -14,7 +14,8 @@ class ReviewController extends Controller
         $validator = Validator::make($request->all(), [
             'description' => ['required', 'max:255'],
             'stars' => ['required', 'integer', 'min:1', 'max:5'],
-            'user_id' => ['required', 'exists:users,id']
+            'user_id' => ['required', 'exists:users,id'],
+            'hotel_id' => ['required', 'exists:hotels,id']
         ]);
 
         if($validator->fails()) {
@@ -28,6 +29,7 @@ class ReviewController extends Controller
         $review->description = $request->input('description');
         $review->stars = $request->input('stars');
         $review->user_id = $request->input('user_id');
+        $review->hotel_id = $request->input('hotel_id');
         $review->save();
 
         return response()->json($review, 201);
@@ -50,13 +52,13 @@ class ReviewController extends Controller
         //$id=3
 
         //Operazione di SELECT su DB
-        $review = Review::where('id', '=', $id)->with('user')->findOrFail();
+        $review = Review::where('id', '=', $id)->with(['user', 'hotel'])->findOrFail();
         return response()->json($review);
     }
 
     public function readAll(Request $request) {
         //Operazione di SELECT su DB
-        $reviews = Review::with('user')->get();
+        $reviews = Review::with(['user', 'hotel'])->get();
         return response()->json($reviews);
     }
 
@@ -68,7 +70,8 @@ class ReviewController extends Controller
         $validator = Validator::make($request->all(), [
             'description' => ['required', 'max:255'],
             'stars' => ['required', 'integer', 'min:1', 'max:5'],
-            'user_id' => ['required', 'exists:users,id']
+            'user_id' => ['required', 'exists:users,id'],
+            'hotel_id' => ['required', 'exists:hotels,id']
         ]);
 
         if($validator->fails()) {
@@ -82,6 +85,7 @@ class ReviewController extends Controller
         $review->description = $request->input('description');
         $review->stars = $request->input('stars');
         $review->user_id = $request->input('user_id');
+        $review->hotel_id = $request->input('hotel_id');
         $review->save();
 
         return response()->json($review);

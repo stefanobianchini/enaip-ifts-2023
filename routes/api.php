@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\HotelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,3 +39,14 @@ Route::get('/reviews/{id}', [ReviewController::class, 'read']);
 Route::get('/reviews', [ReviewController::class, 'readAll']);
 //PUT http://localhost:8000/api/reviews/22
 Route::put('/reviews/{id}', [ReviewController::class, 'update']);
+
+//POST http://localhost:8000/api/hotels
+Route::post('/hotels', [HotelController::class, 'create']);
+//DELETE http://localhost:8000/api/hotels/7 
+Route::delete('/hotels/{id}', [HotelController::class, 'delete']);
+//GET http://localhost:8000/api/hotels/3
+Route::get('/hotels/{id}', [HotelController::class, 'read']);
+//GET http://localhost:8000/api/hotels
+Route::get('/hotels', [HotelController::class, 'readAll']);
+//PUT http://localhost:8000/api/hotels/22
+Route::put('/hotels/{id}', [HotelController::class, 'update']);
