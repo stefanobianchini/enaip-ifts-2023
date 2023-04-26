@@ -42,7 +42,7 @@ class ReviewController extends Controller
 
         //Operazione di DELETE su DB
 
-        $review = Review::where('id', '=', $id)->findOrFail();
+        $review = Review::where('id', '=', $id)->firstOrFail();
         $review->delete();
         return response()->json(null, 204);
     }
@@ -52,7 +52,7 @@ class ReviewController extends Controller
         //$id=3
 
         //Operazione di SELECT su DB
-        $review = Review::where('id', '=', $id)->with(['user', 'hotel'])->findOrFail();
+        $review = Review::where('id', '=', $id)->with(['user', 'hotel'])->firstOrFail();
         return response()->json($review);
     }
 
@@ -81,7 +81,7 @@ class ReviewController extends Controller
         }
 
         //Ora eseguo la UPDATE su database
-        $review = Review::where('id', '=', $id)->findOrFail();
+        $review = Review::where('id', '=', $id)->firstOrFail();
         $review->description = $request->input('description');
         $review->stars = $request->input('stars');
         $review->user_id = $request->input('user_id');

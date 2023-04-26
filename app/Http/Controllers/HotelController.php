@@ -38,7 +38,7 @@ class HotelController extends Controller
 
         //Operazione di DELETE su DB
 
-        $hotel = Hotel::where('id', '=', $id)->findOrFail();
+        $hotel = Hotel::where('id', '=', $id)->firstOrFail();
         $hotel->delete();
         return response()->json(null, 204);
     }
@@ -48,7 +48,7 @@ class HotelController extends Controller
         //$id=3
 
         //Operazione di SELECT su DB
-        $hotel = Hotel::where('id', '=', $id)->with('reviews')->findOrFail();
+        $hotel = Hotel::where('id', '=', $id)->with('reviews')->firstOrFail();
         return response()->json($hotel);
     }
 
@@ -75,7 +75,7 @@ class HotelController extends Controller
         }
 
         //Ora eseguo la UPDATE su database
-        $hotel = Hotel::where('id', '=', $id)->findOrFail();
+        $hotel = Hotel::where('id', '=', $id)->firstOrFail();
         $hotel->name = $request->input('name');
         $hotel->classification = $request->input('classification');
         $hotel->save();

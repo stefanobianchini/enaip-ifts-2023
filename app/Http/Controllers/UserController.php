@@ -46,7 +46,7 @@ class UserController extends Controller
 
         //Operazione di DELETE su DB
 
-        $user = User::where('id', '=', $id)->findOrFail();
+        $user = User::where('id', '=', $id)->firstOrFail();
         $user->delete();
         return response()->json(null, 204);
     }
@@ -56,7 +56,7 @@ class UserController extends Controller
         //$id=3
 
         //Operazione di SELECT su DB
-        $user = User::where('id', '=', $id)->with('reviews')->findOrFail();
+        $user = User::where('id', '=', $id)->with('reviews')->firstOrFail();
         return response()->json($user);
     }
 
@@ -87,7 +87,7 @@ class UserController extends Controller
         }
 
         //Ora eseguo la UPDATE su database
-        $user = User::where('id', '=', $id)->findOrFail();
+        $user = User::where('id', '=', $id)->firstOrFail();
         $user->username = $request->input('username');
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
